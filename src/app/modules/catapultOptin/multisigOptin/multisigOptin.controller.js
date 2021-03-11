@@ -134,7 +134,7 @@ class MultisigOptInCtrl {
                         }
                         if (this.optinStatus === StatusCode.OPTIN_MS_CONVERT){
                             const nisPubKey = this._DataStore.account.metaData.account.publicKey;
-                            if (msigCache.cosignDTOs[nisPubKey] != null) this.step = 5;
+                            // if (msigCache.cosignDTOs[nisPubKey] != null) this.step = 4;
                         }
 
                         const destinations = msigCache.cosignersDestinations;

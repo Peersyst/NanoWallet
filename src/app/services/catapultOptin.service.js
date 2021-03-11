@@ -4,7 +4,7 @@ import {
     NormalCache,
     OptinConstants,
     status,
-    hasOptInStopped
+    hasOptInStopped, StatusCode
 } from "catapult-optin-module";
 import {
     buildCosignDTOLedger,
@@ -297,7 +297,10 @@ class CatapultOptin {
                 const config = this.getOptinConfig();
                 if (origin.meta.cosignatories.length > 0) {
                     this.getMultisigCache(origin, true).then( cache => {
-                        status(origin, config, cache).then(resolve);
+                        status(origin, config, cache).then( status => {
+                            if (status === StatusCode.OPTIN_MS_DONE) resolve(StatusCode.OPTIN_MS_CONVERT);
+                            else resolve(status);
+                        });
                     });
                 } else {
                     this.getNormalCache(origin, true).then( cache => {
